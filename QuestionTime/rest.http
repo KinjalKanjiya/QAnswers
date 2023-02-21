@@ -1,0 +1,23 @@
+@token = bed29ab3b72124508105f9f9ef44fca33ecb943d
+POST http://localhost:8000/auth/users/
+Content-Type: application/json
+
+{
+    "username":"new_user",
+    "email": "new@user.com",
+    "password":"new_user_password",
+    "re_password":"new_user_password"
+}
+
+### Login
+POST http://localhost:8000/auth/token/login/
+Content-Type: application/json
+
+{
+    "username":"new_user",
+    "password":"new_user_password"
+}
+
+### Logout
+POST http://localhost:8000/auth/token/logout/
+Authorization: token {{token}}
