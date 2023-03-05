@@ -1,11 +1,18 @@
 <template>
-  <div class="home">
-    <h1>Home Page</h1>
-    <button @click="getQuestions">LOAD QUESTIONS</button>
-    <div v-if="this.questions">
-      {{ this.questions }}
+ <div class="home mt-3">
+  <div class ="container">
+    <div v-for="question in questions" :key="question.pk">
+     <div class="card shadow p-2 mb-4 bg-body-tertiary rounded">
+      <div class="card-body">
+        <p class="  mb-0"> 
+          Posted by: <span class="question-author">{{ question.author }}</span></p>
+        <h2>{{ question.content }}</h2>
+        <p class="mb-0"> Answers: {{question.answers_count }}</p>
+      </div>
+     </div>
     </div>
   </div>
+ </div>
 </template>
 
 <script>
@@ -30,7 +37,17 @@ export default {
         alert(error.response.statusText);
       }
     }
+  },
+  created(){
+    console.log("Created Lifecycle Hook")
+    this.getQuestions();
   }
 
 }
 </script>
+<style>
+.question-author{
+  font-weight: bold;
+  color:#dc3445;
+}
+</style>
