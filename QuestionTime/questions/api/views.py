@@ -17,6 +17,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
      def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+    #  def get_queryset(self):
+    #      raise Exception("Not Implemented")
+    #      return super().get_queryset()
+        
+
 class AnswerCreateAPIView(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
