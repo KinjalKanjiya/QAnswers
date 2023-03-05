@@ -18,6 +18,13 @@ class QuestionViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
     #  def get_queryset(self):
+    #      import time
+    #      time.sleep(3)
+    #      return super().get_queryset()
+
+    
+
+    #  def get_queryset(self):
     #      raise Exception("Not Implemented")
     #      return super().get_queryset()
         

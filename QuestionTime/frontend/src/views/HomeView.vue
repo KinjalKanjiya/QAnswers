@@ -1,18 +1,24 @@
 <template>
- <div class="home mt-3">
-  <div class ="container">
-    <div v-for="question in questions" :key="question.pk">
-     <div class="card shadow p-2 mb-4 bg-body-tertiary rounded">
-      <div class="card-body">
-        <p class="  mb-0"> 
-          Posted by: <span class="question-author">{{ question.author }}</span></p>
-        <h2>{{ question.content }}</h2>
-        <p class="mb-0"> Answers: {{question.answers_count }}</p>
+  <div class="home mt-3">
+    <div class="container">
+      <div v-for="question in questions" :key="question.uuid">
+        <div class="card shadow p-2 mb-4 bg-body rounded">
+          <div class="card-body">
+            <p class="  mb-0">
+              Posted by: <span class="question-author">{{ question.author }}</span></p>
+            <h2>{{ question.content }}</h2>
+            <p class="mb-0"> Answers: {{ question.answers_count }}</p>
+          </div>
+        </div>
       </div>
-     </div>
+      <div class="my-4">
+        <p v-show="loadingQuestion">Loading....</p>
+        <button v-show="next" @click="getQuestions" class="btn btn-sm btn-outline-success">
+          Load More
+        </button>
+      </div>
     </div>
   </div>
- </div>
 </template>
 
 <script>
@@ -21,15 +27,29 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      questions: []
+      questions: [],
+      next: null,
+      loadingQuestion : false
+
     }
   },
   methods: {
     async getQuestions() {
       let endpoint = "/api/v1/questions/";
+      if (this.next) {
+        endpoint = this.next
+      }
+      this.loadingQuestion = true;
       try {
         const response = await axios.get(endpoint);
-        this.questions = response.data;
+        this.questions.push(...response.data.results);
+        this.loadingQuestion = false;
+        if (response.data.next) {
+          this.next = response.data.next;
+        }
+        else {
+          this.next = null;
+        }
         console.log(this.questions);
       }
       catch (error) {
@@ -38,7 +58,7 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     console.log("Created Lifecycle Hook")
     this.getQuestions();
   }
@@ -46,8 +66,8 @@ export default {
 }
 </script>
 <style>
-.question-author{
+.question-author {
   font-weight: bold;
-  color:#dc3445;
+  color: #dc3445;
 }
 </style>
