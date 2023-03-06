@@ -2,43 +2,41 @@
     <div>
         {{ question }}
     </div>
-
 </template>
 <script>
 import { axios } from "@/common/api.service.js";
 
-export default{
-    name:"QuesTion",
-    props:{
-        slug:{
+export default {
+    name: "QuesTion",
+    props: {
+        slug: {
             type: String,
             required: true,
         },
     },
-    data(){
-        return{
+    data() {
+        return {
             question: {}
         }
     },
-    methods:{
-        async getQuestionData(){
+    methods: {
+        async getQuestionData() {
             const endpoint = '/api/v1/questions/${this.slug}/';
-            try{
+            try {
                 const response = await axios.get(endpoint);
                 this.question = response.data;
             }
-            catch(error){
+            catch (error) {
                 console.log(error.response);
                 alert(error.response.statusText);
             }
 
         }
     },
-    created(){
+    created() {
         this.getQuestionData();
     }
 
 }
 </script>
-<style>
-</style>
+<style></style>

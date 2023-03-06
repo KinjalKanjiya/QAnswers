@@ -1,9 +1,9 @@
 <template>
     <nav class="navbar navbar-expand-lg  navbar-light bg-light my-navbar">
         <div class="container">
-            <router-link class="navbar-brand" :to="{name:'home-two'}"> 
-                QuestionTime
-            </router-link>
+                <div class="navbar-brand">
+                    QuestionTime
+                </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,22 +21,25 @@
         </div>
     </nav>
 </template>
+
 <script>
 export default {
     name: "NavbarComponent",
 }
 </script>
+
 <style>
-.my-navbar{
+.my-navbar {
     border-bottom: 1px solid #ddd;
 }
-.navbar-brand{
+
+.navbar-brand {
     font-weight: bold;
     font-size: 150%;
-    color:black
-}
-.navbar-brand:hover{
-    color:#dc3545 !important;
+    color: black
 }
 
+.navbar-brand:hover {
+    color: #dc3545 !important;
+}
 </style>
