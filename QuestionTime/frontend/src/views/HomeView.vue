@@ -6,7 +6,14 @@
           <div class="card-body">
             <p class="  mb-0">
               Posted by: <span class="question-author">{{ question.author }}</span></p>
-            <h2>{{ question.content }}</h2>
+    
+        <h2>
+              <router-link 
+                :to="{name:'quesTion',params:{slug:question.slug}}"
+                class="question-link">
+                {{  question.content  }}
+              </router-link></h2>
+          
             <p class="mb-0"> Answers: {{ question.answers_count }}</p>
           </div>
         </div>
@@ -29,7 +36,7 @@ export default {
     return {
       questions: [],
       next: null,
-      loadingQuestion : false
+      loadingQuestion: false
 
     }
   },
@@ -59,6 +66,7 @@ export default {
     }
   },
   created() {
+    document.title = "QuestionTime"
     console.log("Created Lifecycle Hook")
     this.getQuestions();
   }
@@ -69,5 +77,13 @@ export default {
 .question-author {
   font-weight: bold;
   color: #dc3445;
+}
+.question-link{
+  font-weight: 400;
+  color: black;
+  text-decoration: none;
+}
+.question-link:hover{
+  color: #343a40;
 }
 </style>
